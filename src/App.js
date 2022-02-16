@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import "./App.css";
+import { HomePage } from "./pages/home/HomePage.tsx";
+import { QuizePage } from "./pages/QuizePage.tsx";
+import { ScorePage } from "./pages/ScorePage.tsx";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [page, setPage] = useState("home");
+  const [score, setScore] = useState(0);
+
+  const updatePage = (value) => {
+    setPage(value);
+  };
+
+  const updateScore = (value) => {
+    setScore(value);
+  };
+
+  let component;
+  switch (page) {
+    case "home":
+      component = <HomePage updatePage={updatePage} />;
+      break;
+    case "quize":
+      component = (
+        <QuizePage
+          updatePage={updatePage}
+          updateScore={updateScore}
+        />
+      );
+      break;
+    case "score":
+      component = <ScorePage score={score} updatePage={updatePage} />;
+      break;
+  }
+
+  return <div className="App">{component}</div>;
 }
 
 export default App;
