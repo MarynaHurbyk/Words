@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Selector } from "./Selector.tsx";
-import { Sorter } from "./Sorter.tsx";
+import { SelectTopic } from "./SelectTopic.tsx";
+import { SortTopic } from "./SortTopic.tsx";
 import "../../css/filter.css";
 
 interface Props {
@@ -16,10 +16,10 @@ export const Filter: React.FC<Props> = ({
   return (
     <div className="filter" style={styles.filter}>
       <div>
-        <Selector updateSelectedOption={updateSelectedOption} />
+        <SelectTopic updateSelectedOption={updateSelectedOption} />
       </div>
       <div>
-        <Sorter updateSortedOption={updateSortedOption} />
+        <SortTopic updateSortedOption={updateSortedOption} />
       </div>
     </div>
   );

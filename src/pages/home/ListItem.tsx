@@ -1,91 +1,43 @@
-import React, { useState, useEffect } from "react";
-
-import { Item } from "./Item.tsx";
-import { listTopicData } from "../../listTopicData.tsx";
-import "../../css/listItem.css";
-
-const sortNameUp = (a, b) => {
-  if (a.name > b.name) {
-    return -1;
-  }
-  if (a.name < b.name) {
-    return 1;
-  }
-  return 0;
-};
-
-const sortNameDown = (a, b) => {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-};
+import React from "react";
 
 interface Props {
-  selectedOption: string;
-  sortedOption: string;
+  name: string;
+  imageResource: string;
+  imageAlt: string;
   updatePage: (value: string) => void;
 }
 
 export const ListItem: React.FC<Props> = ({
-  selectedOption,
-  sortedOption,
+  name,
+  imageResource,
+  imageAlt,
   updatePage,
-}) => {
-  const [filteredListTopicData, setFilteredListTopicData] =
-    useState(listTopicData);
+}) => (
+  <div style={styles.item}>
+    <button
+      onClick={() => {
+        updatePage("quiz");
+      }}
+      style={styles.itemButton}
+    >
+      {name}
 
-  const filtered = () => {
-    if (selectedOption === "all") {
-      setFilteredListTopicData(listTopicData);
-    } else {
-      setFilteredListTopicData(
-        listTopicData.filter((item) => item.section === selectedOption)
-      );
-    }
-  };
-
-  useEffect(() => {
-    setFilteredListTopicData(filtered);
-  }, [selectedOption]);
-
-  useEffect(() => {
-    if (sortedOption === "NameUp") {
-      setFilteredListTopicData(filteredListTopicData.sort(sortNameUp));
-    }
-    if (sortedOption !== "NameUp") {
-      setFilteredListTopicData(filteredListTopicData.sort(sortNameDown));
-    }
-  }, [sortedOption]);
-
-  return (
-    <div style={styles.listItems}>
-      {filteredListTopicData.map((filtredItem) => {
-        return (
-          <Item
-            key={filtredItem.id}
-            name={filtredItem.name}
-            linkResource={filtredItem.linkResource}
-            imageResource={filtredItem.imageResource}
-            ImageAlt={filtredItem.imageAlt}
-            updatePage={updatePage}
-          />
-        );
-      })}
-    </div>
-  );
-};
+      <img src={imageResource} alt={imageAlt} style={styles.itemImage} />
+    </button>
+  </div>
+);
 
 const styles = {
-  listItems: {
-    width: "500px",
-    height: "900px",
-    margin: "20px",
+  item: {
     display: "flex",
     flexDirection: "column",
-    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#e7f1f7",
+    width: "300px",
+    height: "220px",
+    margin: "10px",
   },
+  itemButton: { color: "green", textDecoration: "none", fontWeight: "bold" },
+  itemImage: { width: "250px", height: "160px", marginTop: "5px" },
 } as const;

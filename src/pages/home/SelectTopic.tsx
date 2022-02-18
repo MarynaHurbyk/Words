@@ -6,46 +6,41 @@ interface Props {
   updateSelectedOption: (value: string) => void;
 }
 
-export const Selector: React.FC<Props> = ({ updateSelectedOption }) => {
-  const listOptions = [
+export const SelectTopic: React.FC<Props> = ({ updateSelectedOption }) => {
+  type Option = { value: string; isDisabled: boolean };
+
+  const listOptions: Option[] = [
     {
       value: "Select section",
-      title: "Select section",
       isDisabled: true,
     },
     {
       value: "all",
-      title: "Tutti",
       isDisabled: false,
     },
     {
       value: "house",
-      title: "La casa",
       isDisabled: false,
     },
     {
       value: "people",
-      title: "Le persone",
       isDisabled: false,
     },
     {
       value: "health",
-      title: "La salute",
       isDisabled: false,
     },
     {
       value: "work",
-      title: "Il lavoro",
       isDisabled: false,
     },
     {
       value: "educatoion",
-      title: "Lo studio",
       isDisabled: false,
     },
   ];
 
-  const [selectedOption, setSelectedOption] = useState(listOptions[0].title);
+  const [selectedOption, setSelectedOption] = useState("Selected section");
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -62,6 +57,9 @@ export const Selector: React.FC<Props> = ({ updateSelectedOption }) => {
         }}
         style={styles.select}
       >
+        <option value="" disabled>
+          hi
+        </option>
         {listOptions.map((item) => {
           return (
             <option
@@ -69,7 +67,7 @@ export const Selector: React.FC<Props> = ({ updateSelectedOption }) => {
               value={item.value}
               disabled={item.isDisabled}
             >
-              {item.title}
+              {item.value}
             </option>
           );
         })}
