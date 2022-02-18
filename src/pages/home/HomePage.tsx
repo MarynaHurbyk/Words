@@ -24,25 +24,26 @@ const sortNameDown = (a, b) => {
   return 0;
 };
 
-interface Props {
+type Props = {
   updatePage: (value: string) => void;
-}
+};
+
 export const HomePage: React.FC<Props> = ({ updatePage }) => {
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedTopicOption, setSelectedOption] = useState("");
   const [sortedOption, setSortedOption] = useState("");
   const [filteredListTopic, setFilteredListTopic] = useState(listTopicData);
 
   useEffect(() => {
     let filtered;
-    if (selectedOption === "all") {
+    if (selectedTopicOption === "all") {
       filtered = listTopicData;
     } else {
       filtered = listTopicData.filter(
-        (item) => item.section === selectedOption
+        (item) => item.section === selectedTopicOption
       );
     }
     setFilteredListTopic(filtered);
-  }, [selectedOption]);
+  }, [selectedTopicOption]);
 
   useEffect(() => {
     if (sortedOption === "NameUp") {
@@ -51,7 +52,8 @@ export const HomePage: React.FC<Props> = ({ updatePage }) => {
     if (sortedOption !== "NameUp") {
       setFilteredListTopic(filteredListTopic.sort(sortNameDown));
     }
-  }, [sortedOption]);
+  }, [sortedOption,]);
+
   return (
     <>
       <p> Sort global: {sortedOption}</p>

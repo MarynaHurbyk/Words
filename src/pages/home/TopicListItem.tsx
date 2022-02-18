@@ -1,13 +1,14 @@
 import React from "react";
+import {PageName} from "../../App"
 
 interface Props {
   name: string;
   imageResource: string;
   imageAlt: string;
-  updatePage: (value: string) => void;
+  updatePage: (value: PageName) => void ;
 }
 
-export const ListItem: React.FC<Props> = ({
+export const TopicListItem: React.FC<Props> = ({
   name,
   imageResource,
   imageAlt,

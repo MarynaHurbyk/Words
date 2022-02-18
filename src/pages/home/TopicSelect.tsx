@@ -2,41 +2,36 @@ import React, { useState } from "react";
 
 import "../../css/filter.css";
 
-interface Props {
+type Option = { value: string; lable: string };
+
+type Props = {
   updateSelectedOption: (value: string) => void;
-}
-
-export const SelectTopic: React.FC<Props> = ({ updateSelectedOption }) => {
-  type Option = { value: string; isDisabled: boolean };
-
+};
+export const TopicSelect: React.FC<Props> = ({ updateSelectedOption }) => {
   const listOptions: Option[] = [
     {
-      value: "Select section",
-      isDisabled: true,
-    },
-    {
       value: "all",
-      isDisabled: false,
+      lable: "all",
     },
     {
       value: "house",
-      isDisabled: false,
-    },
-    {
-      value: "people",
-      isDisabled: false,
+      lable: "house",
     },
     {
       value: "health",
-      isDisabled: false,
+      lable: "health",
+    },
+    {
+      value: "health",
+      lable: "health",
     },
     {
       value: "work",
-      isDisabled: false,
+      lable: "work",
     },
     {
       value: "educatoion",
-      isDisabled: false,
+      lable: "educatoion",
     },
   ];
 
@@ -57,17 +52,13 @@ export const SelectTopic: React.FC<Props> = ({ updateSelectedOption }) => {
         }}
         style={styles.select}
       >
-        <option value="" disabled>
-          hi
+        <option value="Select section" disabled>
+          Select section
         </option>
         {listOptions.map((item) => {
           return (
-            <option
-              key={item.value}
-              value={item.value}
-              disabled={item.isDisabled}
-            >
-              {item.value}
+            <option key={item.value} value={item.value}>
+              {item.lable}
             </option>
           );
         })}

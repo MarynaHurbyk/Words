@@ -1,18 +1,18 @@
 import React from "react";
 
-import { ListItem } from "./ListItem.tsx";
+import { TopicListItem } from "./TopicListItem.tsx";
 import "../../css/listItem.css";
 
 type ListItemTopic = {
   id: number;
   section: string;
   name: string;
-  imageResource: /*?*/ string;
+  imageResource: string;
   imageAlt: string;
 };
 
 interface Props {
-  filteredlistTopic: [ListItemTopic];
+  filteredlistTopic: ListItemTopic[];
   updatePage: (value: string) => void;
 }
 
@@ -24,7 +24,7 @@ export const TopicList: React.FC<Props> = ({
     <div style={styles.listItems}>
       {filteredlistTopic.map((filtredItem) => {
         return (
-          <ListItem
+          <TopicListItem
             key={filtredItem.id}
             name={filtredItem.name}
             imageResource={filtredItem.imageResource}

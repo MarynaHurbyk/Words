@@ -6,7 +6,7 @@ interface Props {
   updateSortedOption: (value: string) => void;
 }
 
-export const SortTopic: React.FC<Props> = ({ updateSortedOption }) => {
+export const TopicSort: React.FC<Props> = ({ updateSortedOption }) => {
   return (
     <div className="sort" style={styles.sort}>
       <div className="sort__title" style={styles.sortTitle}>

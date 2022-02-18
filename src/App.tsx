@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-import "./App.css";
 import { HomePage } from "./pages/home/HomePage.tsx";
 import { QuizPage } from "./pages/quiz/QuizPage.tsx";
 import { ScorePage } from "./pages/score/ScorePage.tsx";
+import "./App.css";
 
-function App() {
-  type PageName = "home" | "quiz" | "score";
+export type PageName = "home" | "quiz" | "score";
+
+function App() {  
   const [page, setPage] = useState<PageName>("home");
   const [score, setScore] = useState(0);
 
