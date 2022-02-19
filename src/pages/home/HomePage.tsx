@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Filter } from "./Filter.tsx";
 import { TopicList } from "./TopicList.tsx";
-import { listTopicData } from "../../listTopicData.ts";
+import { topicListData } from "../../topicListData.ts";
+import { PageName } from "../../App";
 
 const sortNameUp = (a, b) => {
   if (a.name > b.name) {
@@ -25,43 +26,41 @@ const sortNameDown = (a, b) => {
 };
 
 type Props = {
-  updatePage: (value: string) => void;
+  updatePage: (value: PageName) => void;
 };
 
 export const HomePage: React.FC<Props> = ({ updatePage }) => {
-  const [selectedTopicOption, setSelectedOption] = useState("");
-  const [sortedOption, setSortedOption] = useState("");
-  const [filteredListTopic, setFilteredListTopic] = useState(listTopicData);
+ 
+  const [topicList, setTopicList] = useState(topicListData);
 
-  useEffect(() => {
+  const updateSortedTopiclist = (sortedTopicOption) => {
+    if (sortedTopicOption === "NameUp") {
+      setTopicList(topicList.sort(sortNameUp));
+    }
+    if (sortedTopicOption !== "NameUp") {
+      setTopicList(topicList.sort(sortNameDown));
+    }
+  };
+
+  const updateSelectedTopicList = (selectedTopicOption) => {
     let filtered;
     if (selectedTopicOption === "all") {
-      filtered = listTopicData;
+      filtered = topicListData;
     } else {
-      filtered = listTopicData.filter(
+      filtered = topicListData.filter(
         (item) => item.section === selectedTopicOption
       );
     }
-    setFilteredListTopic(filtered);
-  }, [selectedTopicOption]);
-
-  useEffect(() => {
-    if (sortedOption === "NameUp") {
-      setFilteredListTopic(filteredListTopic.sort(sortNameUp));
-    }
-    if (sortedOption !== "NameUp") {
-      setFilteredListTopic(filteredListTopic.sort(sortNameDown));
-    }
-  }, [sortedOption,]);
+    setTopicList(filtered);
+  };
 
   return (
     <>
-      <p> Sort global: {sortedOption}</p>
       <Filter
-        updateSelectedOption={setSelectedOption}
-        updateSortedOption={setSortedOption}
+        updateSelectedTopicList= {updateSelectedTopicList}
+        updateSortedTopiclist= {updateSortedTopiclist}
       />
-      <TopicList filtredListTopic={filteredListTopic} updatePage={updatePage} />
+      <TopicList topicList={topicList} updatePage={updatePage} />
     </>
   );
 };

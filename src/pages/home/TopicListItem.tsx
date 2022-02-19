@@ -1,7 +1,7 @@
 import React from "react";
-import {PageName} from "../../App"
+import {PageName} from "../../App";
 
-interface Props {
+type Props = {
   name: string;
   imageResource: string;
   imageAlt: string;

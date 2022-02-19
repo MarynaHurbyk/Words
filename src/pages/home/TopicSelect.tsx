@@ -5,9 +5,10 @@ import "../../css/filter.css";
 type Option = { value: string; lable: string };
 
 type Props = {
-  updateSelectedOption: (value: string) => void;
+  updateSelectedTopiclist: (value: string) => void;
 };
-export const TopicSelect: React.FC<Props> = ({ updateSelectedOption }) => {
+
+export const TopicSelect: React.FC<Props> = ({ updateSelectedTopiclist }) => {
   const listOptions: Option[] = [
     {
       value: "all",
@@ -18,8 +19,8 @@ export const TopicSelect: React.FC<Props> = ({ updateSelectedOption }) => {
       lable: "house",
     },
     {
-      value: "health",
-      lable: "health",
+      value: "people",
+      lable: "people",
     },
     {
       value: "health",
@@ -35,7 +36,7 @@ export const TopicSelect: React.FC<Props> = ({ updateSelectedOption }) => {
     },
   ];
 
-  const [selectedOption, setSelectedOption] = useState("Selected section");
+  const [selectedOption, setSelectedOption] = useState("Select section");
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -48,7 +49,7 @@ export const TopicSelect: React.FC<Props> = ({ updateSelectedOption }) => {
         value={selectedOption}
         onChange={handleSelectChange}
         onClick={() => {
-          updateSelectedOption(selectedOption);
+          updateSelectedTopiclist(selectedOption);
         }}
         style={styles.select}
       >

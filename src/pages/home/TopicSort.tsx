@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../../css/filter.css";
 
-interface Props {
-  updateSortedOption: (value: string) => void;
-}
+type Props = {
+  updateSortedTopiclist: (value: string) => void;
+};
 
-export const TopicSort: React.FC<Props> = ({ updateSortedOption }) => {
+export const TopicSort: React.FC<Props> = ({ updateSortedTopiclist }) => {
+  const [sortedTopicOption, setSortedTopicOption] = useState("");
+
+  const handleSortChange = (event) => {
+    setSortedTopicOption(event.target.value);
+    updateSortedTopiclist(sortedTopicOption);
+  };
+
   return (
     <div className="sort" style={styles.sort}>
       <div className="sort__title" style={styles.sortTitle}>
@@ -17,9 +24,8 @@ export const TopicSort: React.FC<Props> = ({ updateSortedOption }) => {
           <input
             type="radio"
             name="sort"
-            onChange={() => {
-              updateSortedOption("NameUp");
-            }}
+            value="NameUp"
+            onChange={handleSortChange}
           />
           NameUp
         </label>
@@ -29,9 +35,8 @@ export const TopicSort: React.FC<Props> = ({ updateSortedOption }) => {
           <input
             type="radio"
             name="sort"
-            onClick={() => {
-              updateSortedOption("NameDown");
-            }}
+            value="NameDown"
+            onClick={handleSortChange}
           />
           NameDown
         </label>

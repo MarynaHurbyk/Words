@@ -4,22 +4,22 @@ import { TopicSelect } from "./TopicSelect.tsx";
 import { TopicSort } from "./TopicSort.tsx";
 import "../../css/filter.css";
 
-interface Props {
-  updateSelectedOption: (value: string) => void;
-  updateSortedOption: (value: string) => void;
+type Props = {
+  updateSelectedTopicList: (value: string) => void;
+  updateSortedTopiclist: (value: string) => void;
 }
 
 export const Filter: React.FC<Props> = ({
-  updateSelectedOption,
-  updateSortedOption,
+  updateSelectedTopicList,
+  updateSortedTopiclist,
 }) => {
   return (
     <div className="filter" style={styles.filter}>
       <div>
-        <TopicSelect updateSelectedOption={updateSelectedOption} />
+        <TopicSelect updateSelectedTopicList={updateSelectedTopicList} />
       </div>
       <div>
-        <TopicSort updateSortedOption={updateSortedOption} />
+        <TopicSort updateSortedTopiclist={updateSortedTopiclist} />
       </div>
     </div>
   );

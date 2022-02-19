@@ -11,18 +11,18 @@ type ListItemTopic = {
   imageAlt: string;
 };
 
-interface Props {
-  filteredlistTopic: ListItemTopic[];
+type Props = {
+  topicList: ListItemTopic[];
   updatePage: (value: string) => void;
 }
 
 export const TopicList: React.FC<Props> = ({
   updatePage,
-  filteredlistTopic,
+  topicList,
 }) => {
   return (
     <div style={styles.listItems}>
-      {filteredlistTopic.map((filtredItem) => {
+      {topicList.map((filtredItem) => {
         return (
           <TopicListItem
             key={filtredItem.id}

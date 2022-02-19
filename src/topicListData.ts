@@ -1,4 +1,4 @@
-export const listTopicData = [
+export const topicListData = [
   {
     id: 1,
     section: "house",
